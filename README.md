@@ -69,3 +69,7 @@ If `amdgpu` is not in the list, the program stops with an error. `k10temp` (CPU)
     sudo rm /usr/local/bin/powerlog /etc/systemd/system/powerlog.service /etc/logrotate.d/powerlog
     sudo userdel powerlog
     sudo rm -r /var/log/powerlog   # deletes the logs
+
+## License
+
+MIT, see `LICENSE`.
