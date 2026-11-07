@@ -1,0 +1,38 @@
+[Unit]
+Description=APU power and temperature logger
+Documentation=file:///usr/local/bin/powerlog
+
+[Service]
+ExecStart=/usr/local/bin/powerlog -o /var/log/powerlog/power.csv
+User=powerlog
+Group=powerlog
+# systemd creates /var/log/powerlog owned by powerlog
+LogsDirectory=powerlog
+LogsDirectoryMode=0755
+UMask=0022
+Restart=on-failure
+RestartSec=10
+
+# Hardening: only needs to read /sys and write its log directory
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

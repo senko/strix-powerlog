@@ -1,0 +1,17 @@
+# Weekly rotation, one year kept. Current week + last week stay plain CSV,
+# older weeks are gzipped: power-YYYYMMDD.csv, power-YYYYMMDD.csv.gz, ...
+# (date = day of rotation, i.e. the end of the week that file covers).
+# powerlog notices the rename and starts a new file by itself, no postrotate needed.
+/var/log/powerlog/power.csv {
+    su powerlog powerlog
+    weekly
+    rotate 52
+    dateext
+    dateformat -%Y%m%d
+    extension .csv
+    compress
+    delaycompress
+    missingok
+    notifempty
+    nocreate
+}
